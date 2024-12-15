@@ -2,7 +2,7 @@
 
 blue:
   replicaCount: 2
-  image:
+  image: 044933909280.dkr.ecr.us-east-1.amazonaws.com/helm/blue-green
     repository: sample-demo
     tag: latest
   resources:
@@ -15,7 +15,7 @@ blue:
 
 green:
   replicaCount: 2
-  image:
+  image: 044933909280.dkr.ecr.us-east-1.amazonaws.com/helm/blue-green
     repository: sample-demo
     tag: latest
   resources:

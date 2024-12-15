@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-demo
+spec:
+  replicas: {{ .Values.blue.replicaCount }}  # Default to blue deployment
+  selector:
+    matchLabels:
+      app: sample-demo
+  template:
+    metadata:
+      labels:
+        app: sample-demo
+    spec:
+      containers:
+        - name: sample-demo
+          image: "{{ .Values.blue.image.repository }}:{{ .Values.blue.image.tag }}"
+          resources:
+            limits:
+              cpu: {{ .Values.blue.resources.limits.cpu }}
+              memory: {{ .Values.blue.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.blue.resources.requests.cpu }}
+              memory: {{ .Values.blue.resources.requests.memory }}
+
