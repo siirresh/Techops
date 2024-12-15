@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sample-demo-blue
+  annotations:
+    kubernetes.io/ingress.class: "alb"  # Use AWS ALB Ingress Controller
+    alb.ingress.kubernetes.io/scheme: "internet-facing"  # Can be "internet-facing" or "internal"
+    alb.ingress.kubernetes.io/target-type: "ip"  # Targets Pods by IP
+spec:
+  rules:
+    - host: sample-demo.example.com  # Replace with your domain
+      http:
+        paths:
+          - path: /blue
+            pathType: Prefix
+            backend:
+              service:
+                name: sample-demo-blue
+                port:
+                  number: 80
+

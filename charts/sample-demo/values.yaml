@@ -1,0 +1,43 @@
+# Default values for Helm chart
+
+blue:
+  replicaCount: 2
+  image:
+    repository: sample-demo
+    tag: latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+green:
+  replicaCount: 2
+  image:
+    repository: sample-demo
+    tag: latest
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+ingress:
+  enabled: true
+  hosts:
+    - host: sample-demo.example.com
+      paths:
+        - /
+  annotations:
+    # Removed NGINX-specific annotations for AWS ALB Ingress
+    alb.ingress.kubernetes.io/scheme: "internet-facing"  # Can be "internet-facing" or "internal"
+    alb.ingress.kubernetes.io/target-type: "ip"  # Targets Pods by IP
+  tls:
+    - secretName: sample-demo-tls
+      hosts:
+        - sample-demo.example.com
+

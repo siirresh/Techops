@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-demo-green
+spec:
+  replicas: {{ .Values.green.replicaCount }}
+  selector:
+    matchLabels:
+      app: sample-demo
+      color: green
+  template:
+    metadata:
+      labels:
+        app: sample-demo
+        color: green
+    spec:
+      containers:
+        - name: sample-demo
+          image: "{{ .Values.green.image.repository }}:{{ .Values.green.image.tag }}"
+          resources:
+            limits:
+              cpu: {{ .Values.green.resources.limits.cpu }}
+              memory: {{ .Values.green.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.green.resources.requests.cpu }}
+              memory: {{ .Values.green.resources.requests.memory }}
+
